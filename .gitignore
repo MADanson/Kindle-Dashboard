@@ -1,3 +1,13 @@
+/templates
+templates
+/temp
+temp
+/font
+font
+/daily
+daily
+.env
+
 # Logs
 logs
 *.log

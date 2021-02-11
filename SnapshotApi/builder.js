@@ -1,8 +1,8 @@
-const fs = require("fs");
+const screenshot = require("./screenshot");
 
 function boilerplate(title, children) {
   var main = [];
-  var opening = `<!DOCTYPE html><html><head><title>${title}</title></head><body>`;
+  var opening = `<!DOCTYPE html><html><style>*{margin: 0;padding: 0;list-style: none;}</style><head><title>${title}</title></head><body>`;
   main.push(opening);
 
   for (let i = 0; i < children.length; i++) {
@@ -30,8 +30,25 @@ function h3(text, groupOfKids) {
 }
 function div(children, groupOfKids) {
   const clarse = classCheck(groupOfKids);
+  var main = [];
+  main.push(`<div class="${clarse}">`)
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    main.push(eval(child));
+  }
+  main.push(`</div>`);
+  return main.join("");
 }
 
+function weather() {
+  screenshot.take("./templates/Weather/weather.html", 600, 201, "weather");
+  return `<img src='http://${process.env.IP}/temp/weather'/> `
+}
+function dateTime() {
+  screenshot.take("./templates/TimeHeader/dateTime.html", 600, 80, "time");
+  return `<img src='http://${process.env.IP}/temp/time'/> `
+}
+//Helper functions
 function classCheck(clarse) {
   if (clarse === undefined || clarse === null) {
     return "";
