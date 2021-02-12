@@ -45,7 +45,7 @@ function weather() {
   return `<img src='http://${process.env.IP}/temp/weather'/> `
 }
 function dateTime() {
-  screenshot.take("./templates/TimeHeader/dateTime.html", 600, 80, "time");
+  screenshot.take("./templates/TimeHeader/dateTime.html", 600, 60, "time");
   return `<img src='http://${process.env.IP}/temp/time'/> `
 }
 //Helper functions

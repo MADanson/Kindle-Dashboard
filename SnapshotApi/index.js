@@ -31,6 +31,12 @@ app.post("/push/temp", async function (req, res) {
   logger.temperature(req.body.temp)
   res.sendStatus(200)
 });
+app.get("/get/temp", async function (req, res) {
+  const data = {
+    temps: logger.getTemperature()
+  }
+  res.send(data)
+});
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on port", process.env.PORT);
