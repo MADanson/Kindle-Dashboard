@@ -16,6 +16,7 @@ function boilerplate(title, children) {
   return main.join("");
 }
 
+// ELEMENTS
 function h1(text, groupOfKids) {
   const clarse = classCheck(groupOfKids);
   return `<h1 class="${clarse}">${text}</h1>`;
@@ -39,7 +40,31 @@ function div(children, groupOfKids) {
   main.push(`</div>`);
   return main.join("");
 }
+function img(src, groupOfKids, width, height) {
+  const clarse = classCheck(groupOfKids)
+  if (width === undefined && height === undefined) {
+    return `<img class="${clarse}" src="${src}">`
+  } else if (width == undefined) {
+    return `<img class="${clarse}" src="${src}" height="${height}">`
+  } else if (height == undefined) {
+    return `<img class="${clarse}" src="${src}" width="${width}">`
+  } else {
+    return `<img class="${clarse}" src="${src}" width="${width}" height="${height}">`
+  }
+}
 
+function a(href, text, groupOfKids){
+  const clarse = classCheck(groupOfKids)
+  return `<a href="${href}" class="${clarse}" >${text}</a>`
+}
+
+function button(onClick, text, groupOfKids){
+  const clarse = classCheck(groupOfKids)
+  return `<button type="button" onclick=${onClick}>${text}</button>`
+}
+
+
+// EXTERNAL SITES
 function weather() {
   screenshot.take("./templates/Weather/weather.html", 600, 201, "weather");
   return `<img src='http://${process.env.IP}/temp/weather'/> `
@@ -48,6 +73,8 @@ function dateTime() {
   screenshot.take("./templates/TimeHeader/dateTime.html", 600, 60, "time");
   return `<img src='http://${process.env.IP}/temp/time'/> `
 }
+
+
 //Helper functions
 function classCheck(clarse) {
   if (clarse === undefined || clarse === null) {

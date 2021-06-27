@@ -15,12 +15,29 @@ app.use(cors());
 app.use(volleyball);
 app.use(express.json());
 
-app.get("/main", async function (req, res) {
-  const html = build.boilerplate("Farts", ["dateTime()", "weather()"]);
-  setTimeout(function () {
+app.get("/main/:nodelay", async function (req, res) {
+  const html = build.boilerplate("Farts", [`button("location.href='hi.html';", "Click Me!")`]);
+  if(req.params.nodelay == "nodelay"){
     res.send(html);
-  }, 10000);
+  }else{
+    setTimeout(function () {
+      res.send(html);
+    }, 10000);
+  }
 });
+app.get("/page", async function (req, res) {
+
+  const html = build.boilerplate("This is my site", ["h1('This is a heading')", `button('location.href="nextpage";', 'Click Me!')`])
+
+  res.send(html);
+});
+app.get("/printer", async function (req,res) {
+  screenshot.take(req.query.site, 2000, 400, "site", true);
+  setTimeout(function () {
+    res.json({data: `http://${process.env.IP}/temp/site`})
+  }, 10000);
+  
+})
 app.get("/temp/:file", async function (req, res) {
   const image = await screenshot.retrive(req.params.file, res);
   res.writeHead(await image.status, await image.header);
