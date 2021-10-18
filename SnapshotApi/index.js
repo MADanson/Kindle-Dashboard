@@ -31,8 +31,8 @@ app.get("/page", async function (req, res) {
 
   res.send(html);
 });
-app.get("/printer", async function (req,res) {
-  screenshot.take(req.query.site, 2000, 400, "site", true);
+app.get("/printSite", async function (req,res) {
+  screenshot.take(req.query.site, 400, 2200, "site", true);
   setTimeout(function () {
     res.json({data: `http://${process.env.IP}/temp/site`})
   }, 10000);

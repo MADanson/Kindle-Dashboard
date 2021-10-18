@@ -16,7 +16,7 @@ async function take(path, width, height, name, forPrint=false) {
   if(forPrint === true){
     await page.screenshot({ path: `./temp/${name}.jpg` });
   }else{
-    await page.screenshot({ path: `./temp/${name}.png` });
+    await page.screenshot({ path: `./temp/${name}.jpg` });
 
   }
   //Stop browser
