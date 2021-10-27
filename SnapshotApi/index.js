@@ -15,21 +15,15 @@ app.use(cors());
 app.use(volleyball);
 app.use(express.json());
 
-app.get("/main/:nodelay", async function (req, res) {
-  const html = build.boilerplate("Farts", [`button("location.href='hi.html';", "Click Me!")`]);
+app.get("/generate/:page/:nodelay", async function (req, res) {
+  const html = new Page(req.params.page)
   if(req.params.nodelay == "nodelay"){
-    res.send(html);
+    res.send(html.generate());
   }else{
     setTimeout(function () {
-      res.send(html);
+      res.send(html.generate());
     }, 10000);
   }
-});
-app.get("/page", async function (req, res) {
-
-  const html = build.boilerplate("This is my site", ["h1('This is a heading')", `button('location.href="nextpage";', 'Click Me!')`])
-
-  res.send(html);
 });
 app.get("/printSite", async function (req,res) {
   screenshot.take(req.query.site, 400, 2200, "site", true);
