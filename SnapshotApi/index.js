@@ -32,6 +32,12 @@ app.get("/printSite", async function (req,res) {
   }, 10000);
   
 })
+app.get("/namehim", async function (req,res) {
+  const image = await screenshot.retrive("namehim", res);
+  res.writeHead(await image.status, await image.header);
+  res.end(await image.img);
+  
+})
 app.get("/temp/:file", async function (req, res) {
   const image = await screenshot.retrive(req.params.file, res);
   res.writeHead(await image.status, await image.header);

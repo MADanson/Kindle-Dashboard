@@ -28,12 +28,12 @@ async function retrive(name) {
   if(name === "site"){
     screenshot = fs.readFileSync(`./temp/${name}.jpg`);
   }else{
-    screenshot = fs.readFileSync(`./temp/${name}.png`);
+    screenshot = fs.readFileSync(`./temp/${name}.jpg`);
   }
   return {
     status: 200,
     header: {
-      "Content-Type": "image/png",
+      "Content-Type": "image/jpg",
       "Content-Length": screenshot.length,
     },
     img: screenshot,
